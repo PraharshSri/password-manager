@@ -86,7 +86,7 @@ expressApp.use('/auth', authRoutes);
 expressApp.use('/api', passwordManagerRoutes);
 
 
-expressApp.listen(port, () => {
+expressApp.listen(process.env.PORT || port, () => {
   winston.info(`listening on port ${port}`);
 });
 module.exports = {
