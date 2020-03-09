@@ -1,0 +1,514 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "version": "1.0.0",
+      "title": "Xendit Password Manager",
+      "description": "A NodeJS Application which uses PostgreSQL DB to store data. It works as a password manager."
+    },
+    "tags": [
+      {
+        "name": "auth",
+        "description": "Authorization",
+        "externalDocs": {
+          "description": "Find out more",
+          "url": "http://swagger.io"
+        }
+      },
+      {
+        "name": "passwordManager",
+        "description": "Manage passwords",
+        "externalDocs": {
+          "description": "Find out more",
+          "url": "http://swagger.io"
+        }
+      }
+    ],
+    "paths": {
+      "/auth/registerUser": {
+        "post": {
+          "tags": [
+            "auth"
+          ],
+          "summary": "Register a new user in system",
+          "requestBody": {
+            "description": "Register user object",
+            "required": true,
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterUserRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Account added",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SuccessMessage"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/responses/Error"
+            }
+          }
+        }
+      },
+      "/auth/login": {
+        "post": {
+          "tags": [
+            "auth"
+          ],
+          "summary": "Login user in system",
+          "requestBody": {
+            "description": "Login user object",
+            "required": true,
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginUserRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Account added",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SuccessMessage"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/responses/Error"
+            }
+          }
+        }
+      },
+      "/api/accounts": {
+        "post": {
+          "tags": [
+            "passwordManager"
+          ],
+          "summary": "Create a new password account in system",
+          "requestBody": {
+            "description": "Password account object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddPasswordAccountRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Account added",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SuccessMessage"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/responses/Error"
+            }
+          },
+          "security" : [{
+            "Bearer" : []
+          }
+        ]
+        },
+        "put": {
+          "tags": [
+            "passwordManager"
+          ],
+          "summary": "Update password account in system",
+          "requestBody": {
+            "description": "Update password account object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePasswordAccountRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Account updated",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SuccessMessage"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/responses/Error"
+            }
+          },
+          "security" : [{
+            "Bearer" : []
+          }
+        ]
+        },
+        "delete": {
+          "tags": [
+            "passwordManager"
+          ],
+          "summary": "Delete password account in system",
+          "parameters": [
+          {
+            "name": "account_name",
+            "in": "query",
+            "description": "Account name",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "description": "User name",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+          "responses": {
+            "200": {
+              "description": "Account deleted",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SuccessMessage"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/responses/Error"
+            }
+          },
+          "security" : [{
+            "Bearer" : []
+          }
+        ]
+        },
+        "get": {
+          "tags": [
+            "passwordManager"
+          ],
+          "summary": "Get password account in system",
+          "parameters": [
+          {
+            "name": "account_name",
+            "in": "query",
+            "description": "Account name",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "description": "User name",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+          "responses": {
+            "200": {
+              "description": "Account",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/DataSuccessMessage"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/responses/Error"
+            }
+          },
+          "security" : [{
+            "Bearer" : []
+          }
+        ]
+        }
+      },
+      "/api/accounts/all": {
+        "get": {
+          "tags": [
+            "passwordManager"
+          ],
+          "summary": "Get all password accounts in system",
+          "parameters": [
+          {
+            "name": "page_size",
+            "in": "query",
+            "description": "Page size",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page_number",
+            "in": "query",
+            "description": "Page number",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+          "responses": {
+            "200": {
+              "description": "Accounts",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/DataSuccessMessage"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/responses/Error"
+            }
+          },
+          "security" : [{
+            "Bearer" : []
+          }
+        ]
+        }
+      },
+      "/api/accounts/search": {
+        "get": {
+          "tags": [
+            "passwordManager"
+          ],
+          "summary": "Search password accounts in system",
+          "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Key",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+          "responses": {
+            "200": {
+              "description": "Accounts",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/DataSuccessMessage"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/responses/Error"
+            }
+          },
+          "security" : [{
+            "Bearer" : []
+          }
+        ]
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "RegisterUserRequest": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "minLength": 1
+            },
+            "password": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "LoginUserRequest": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "minLength": 1
+            },
+            "password": {
+              "type": "string",
+              "minLength": 1
+            },
+            "grant_type": {
+              "type": "string",
+              "minLength": 1
+            },
+            "client_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "client_secret": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "AddPasswordAccountRequest": {
+          "type": "object",
+          "properties": {
+            "account_name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "username": {
+              "type": "string",
+              "minLength": 1
+            },
+            "password": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "UpdatePasswordAccountRequest": {
+          "type": "object",
+          "properties": {
+            "account_name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "username": {
+              "type": "string",
+              "minLength": 1
+            },
+            "new_password": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "SuccessMessage": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "object"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        },
+        "DataSuccessMessage": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "object"
+            },
+            "data": {
+              "type": "object"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        },
+        "Error": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "errno": {
+                  "type": "integer"
+                },
+                "sqlMessage": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sqlState": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sql": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "index": {
+                  "type": "integer"
+                }
+              }
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "responses": {
+        "Error": {
+          "description": "Error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Error"
+              }
+            }
+          }
+        }
+      },
+      "securitySchemes" : {
+        "Bearer" : {
+          "type": "apiKey",
+          "name" : "Authorization",
+          "in" : "header"
+        }
+      }
+    }
+  }
