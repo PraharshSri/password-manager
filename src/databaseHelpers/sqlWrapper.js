@@ -13,10 +13,10 @@ let pool = null;
  */
 function initConnection(testMode) {
   pool = new Pool({
-    user: 'root',
-    host: 'localhost',
-    database: global.testMode ? 'pwd_manager_test' : 'pwd_manager',
-    password: 'password',
+    user: 'roqzgvdqwziepq',
+    host: 'ec2-54-210-128-153.compute-1.amazonaws.com',
+    database: global.testMode ? 'd6lfupat0e50em' : 'd6lfupat0e50em',
+    password: '6839366e579ce3608c7d6a8595d6aa9357e3a02ed814dbc1e52210173d4852ba',
     port: 5432,
   });
 }
