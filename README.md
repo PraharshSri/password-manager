@@ -51,5 +51,12 @@ postgres=# \q
 
 psql -d pwd_manager_test -U root
 ```
+
+Clone the project and then : 
+
 # Run Webserver
+
+`npm install`
 `npm start`
+
+Use swagger url (/api-docs) to get api documentation, after running the server.
